@@ -70,13 +70,15 @@ public class CreateAnalyzeConversation {
            ContactCenterInsightsClient.create()) {
       LocationName parent = LocationName.of(projectId, location);
 
-      CreateConversationRequest.Builder createConversationRequestBuilder =
+      CreateConversationRequest createConversationRequest =
         CreateConversationRequest.newBuilder()
           .setConversation(conversation)
-          .setParent(parent.toString()).setConversationId(conversationId);
+          .setParent(parent.toString())
+          .setConversationId(conversationId)
+          .build();
 
       Conversation response =
-        contactCenterInsightsClient.createConversation(createConversationRequestBuilder.build());
+        contactCenterInsightsClient.createConversation(createConversationRequest);
 
       String conversationName = response.getName();
       CreateAnalysisRequest request =
