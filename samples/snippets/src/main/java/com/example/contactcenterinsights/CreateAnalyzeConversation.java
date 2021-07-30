@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google Inc.
+ * Copyright 2021 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.example.contactcenterinsights;
 
 // [START contactcenterinsights_create_analyze_conversation]
+
 import com.google.api.gax.longrunning.OperationFuture;
 import com.google.cloud.contactcenterinsights.v1.Analysis;
 import com.google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient;
@@ -29,16 +30,25 @@ import com.google.cloud.contactcenterinsights.v1.DeleteConversationRequest;
 import com.google.cloud.contactcenterinsights.v1.GcsSource;
 import com.google.cloud.contactcenterinsights.v1.LocationName;
 
+import java.util.concurrent.TimeUnit;
+
 public class CreateAnalyzeConversation {
 
   public static void main(String[] args) {
     String projectId = "your-project-id";
     String location = "us-central1";
+
+    // If a custom conversation ID is provided, it will be used. Setting to an empty string will result in Insights
+    // generating an ID for you.
     String conversationId = "your-conversation-id";
+
+    // The Cloud Storage location of a conversation transcript.
     String transcriptUri = "gs://example-bucket/some-example.json";
+
+    // The medium of your conversation transcript.
     Conversation.Medium medium = Conversation.Medium.CHAT;
 
-    // The conversation to create.
+    // Create an Insights Conversation with the provided `transcriptUri` and `medium`.
     Conversation conversation =
       Conversation.newBuilder()
         .setDataSource(
@@ -53,6 +63,9 @@ public class CreateAnalyzeConversation {
 
   public static void createAnalyzeConversation(
     String projectId, String location, String conversationId, Conversation conversation) {
+    // Initialize client that will be used to send requests. This client only needs to be created
+    // once, and can be reused for multiple requests. After completing all of your requests, call
+    // the "close" method on the client to safely clean up any remaining background resources.
     try (ContactCenterInsightsClient contactCenterInsightsClient =
            ContactCenterInsightsClient.create()) {
       LocationName parent = LocationName.of(projectId, location);
@@ -60,10 +73,8 @@ public class CreateAnalyzeConversation {
       CreateConversationRequest.Builder createConversationRequestBuilder =
         CreateConversationRequest.newBuilder()
           .setConversation(conversation)
-          .setParent(parent.toString());
-      if (!conversationId.isEmpty()) {
-        createConversationRequestBuilder.setConversationId(conversationId);
-      }
+          .setParent(parent.toString()).setConversationId(conversationId);
+
       Conversation response =
         contactCenterInsightsClient.createConversation(createConversationRequestBuilder.build());
 
@@ -74,7 +85,7 @@ public class CreateAnalyzeConversation {
         contactCenterInsightsClient.createAnalysisAsync(request);
 
       System.out.println("Waiting for operation to complete...");
-      Analysis analysis = future.get();
+      Analysis analysis = future.get(60L, TimeUnit.SECONDS);
       System.out.printf("Analysis created: %s.%n", analysis.getName());
 
       // Clean up the created resources.
