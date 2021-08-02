@@ -30,16 +30,20 @@ import com.google.cloud.contactcenterinsights.v1.DeleteConversationRequest;
 import com.google.cloud.contactcenterinsights.v1.GcsSource;
 import com.google.cloud.contactcenterinsights.v1.LocationName;
 
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class CreateAnalyzeConversation {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws InterruptedException, ExecutionException, TimeoutException,
+    IOException {
     String projectId = "your-project-id";
     String location = "us-central1";
 
-    // If a custom conversation ID is provided, it will be used. Setting to an empty string will result in Insights
-    // generating an ID for you.
+    // If a custom conversation ID is provided, it will be used. Setting to an empty string
+    // will result in Insights generating an ID for you.
     String conversationId = "your-conversation-id";
 
     // The Cloud Storage location of a conversation transcript.
@@ -48,6 +52,12 @@ public class CreateAnalyzeConversation {
     // The medium of your conversation transcript.
     Conversation.Medium medium = Conversation.Medium.CHAT;
 
+    createAnalyzeConversation(projectId, location, conversationId, transcriptUri, medium);
+  }
+
+  public static void createAnalyzeConversation(
+    String projectId, String location, String conversationId, String transcriptUri, Conversation.Medium medium)
+    throws IOException, ExecutionException, TimeoutException, InterruptedException {
     // Create an Insights Conversation with the provided `transcriptUri` and `medium`.
     Conversation conversation =
       Conversation.newBuilder()
@@ -58,11 +68,6 @@ public class CreateAnalyzeConversation {
         .setMedium(medium)
         .build();
 
-    createAnalyzeConversation(projectId, location, conversationId, conversation);
-  }
-
-  public static void createAnalyzeConversation(
-    String projectId, String location, String conversationId, Conversation conversation) {
     // Initialize client that will be used to send requests. This client only needs to be created
     // once, and can be reused for multiple requests. After completing all of your requests, call
     // the "close" method on the client to safely clean up any remaining background resources.
@@ -79,8 +84,9 @@ public class CreateAnalyzeConversation {
 
       Conversation response =
         contactCenterInsightsClient.createConversation(createConversationRequest);
-
       String conversationName = response.getName();
+      System.out.printf("Conversation created: %s.%n", conversationName);
+
       CreateAnalysisRequest request =
         CreateAnalysisRequest.newBuilder().setParent(conversationName).build();
       OperationFuture<Analysis, CreateAnalysisOperationMetadata> future =
@@ -95,8 +101,6 @@ public class CreateAnalyzeConversation {
         DeleteConversationRequest.newBuilder().setName(conversationName).setForce(true).build();
       contactCenterInsightsClient.deleteConversation(deleteConversationRequest);
       System.out.printf("Conversation deleted %s.%n", conversationName);
-    } catch (Exception exception) {
-      System.err.println("Failed to create the client due to: " + exception);
     }
   }
 }

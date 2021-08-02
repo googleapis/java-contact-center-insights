@@ -20,10 +20,13 @@ import static com.google.common.truth.Truth.assertThat;
 import static junit.framework.TestCase.assertNotNull;
 
 import com.google.cloud.contactcenterinsights.v1.Conversation;
-import com.google.cloud.contactcenterinsights.v1.ConversationDataSource;
-import com.google.cloud.contactcenterinsights.v1.GcsSource;
+
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -55,51 +58,44 @@ public class CreateAnalyzeConversationIT {
     System.setOut(out);
   }
 
-  public Conversation getConversation(String transcriptUri, Conversation.Medium medium) {
-    return Conversation.newBuilder()
-      .setDataSource(
-        ConversationDataSource.newBuilder()
-          .setGcsSource(GcsSource.newBuilder().setTranscriptUri(transcriptUri).build())
-          .build())
-      .setMedium(medium)
-      .build();
-  }
-
   @Test
-  public void testCreateAnalyzeConversationOk() {
+  public void testCreateAnalyzeConversationOk() throws InterruptedException, ExecutionException, TimeoutException,
+    IOException {
 
     CreateAnalyzeConversation.createAnalyzeConversation(
       PROJECT_ID,
       "us-central1",
       "",
-      getConversation(VOICE_TRANSCRIPT_URI, Conversation.Medium.PHONE_CALL));
+      VOICE_TRANSCRIPT_URI, Conversation.Medium.PHONE_CALL);
 
     String output = bout.toString();
     assertThat(output).contains("Analysis created:");
   }
 
   @Test
-  public void testCreateAnalyzeChatConversationOk() {
+  public void testCreateAnalyzeChatConversationOk() throws InterruptedException, ExecutionException, TimeoutException,
+    IOException {
 
     CreateAnalyzeConversation.createAnalyzeConversation(
       PROJECT_ID,
       "us-central1",
       "",
-      getConversation(CHAT_TRANSCRIPT_URI, Conversation.Medium.CHAT));
+      CHAT_TRANSCRIPT_URI, Conversation.Medium.CHAT);
 
     String output = bout.toString();
     assertThat(output).contains("Analysis created:");
   }
 
   @Test
-  public void testCreateAnalyzeConversationCustomConversationIdOk() {
+  public void testCreateAnalyzeConversationCustomConversationIdOk() throws InterruptedException, ExecutionException,
+    TimeoutException, IOException {
     String conversationId = "custom-conversation-id";
 
     CreateAnalyzeConversation.createAnalyzeConversation(
       PROJECT_ID,
       "us-central1",
       conversationId,
-      getConversation(VOICE_TRANSCRIPT_URI, Conversation.Medium.PHONE_CALL));
+      VOICE_TRANSCRIPT_URI, Conversation.Medium.PHONE_CALL);
 
     String output = bout.toString();
     assertThat(output).contains("Analysis created:");
