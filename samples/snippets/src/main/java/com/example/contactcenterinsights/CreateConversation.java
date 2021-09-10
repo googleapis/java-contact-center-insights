@@ -37,10 +37,7 @@ public class CreateConversation {
   }
 
   public static Conversation createConversation(
-      String projectId,
-      String transcriptUri,
-      String audioUri)
-      throws java.io.IOException {
+      String projectId, String transcriptUri, String audioUri) throws java.io.IOException {
     // Initialize client that will be used to send requests. This client only needs to be created
     // once, and can be reused for multiple requests. After completing all of your requests, call
     // the "close" method on the client to safely clean up any remaining background resources.
@@ -49,23 +46,25 @@ public class CreateConversation {
       LocationName parent = LocationName.of(projectId, "us-central1");
 
       // Construct a conversation.
-      Conversation conversation = Conversation.newBuilder()
-          .setDataSource(
-              ConversationDataSource.newBuilder()
-                  .setGcsSource(
-                      GcsSource.newBuilder()
-                          .setTranscriptUri(transcriptUri)
-                          .setAudioUri(audioUri)
-                          .build())
-                  .build())
-          .setMedium(Conversation.Medium.CHAT)
-          .build();
+      Conversation conversation =
+          Conversation.newBuilder()
+              .setDataSource(
+                  ConversationDataSource.newBuilder()
+                      .setGcsSource(
+                          GcsSource.newBuilder()
+                              .setTranscriptUri(transcriptUri)
+                              .setAudioUri(audioUri)
+                              .build())
+                      .build())
+              .setMedium(Conversation.Medium.CHAT)
+              .build();
 
       // Construct a request.
-      CreateConversationRequest request = CreateConversationRequest.newBuilder()
-          .setParent(parent.toString())
-          .setConversation(conversation)
-          .build();
+      CreateConversationRequest request =
+          CreateConversationRequest.newBuilder()
+              .setParent(parent.toString())
+              .setConversation(conversation)
+              .build();
 
       // Call the Insights client to create a conversation.
       Conversation response = client.createConversation(request);

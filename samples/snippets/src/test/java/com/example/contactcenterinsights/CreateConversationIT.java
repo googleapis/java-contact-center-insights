@@ -67,10 +67,8 @@ public class CreateConversationIT {
 
   @Test
   public void testCreateConversation() throws java.io.IOException {
-    Conversation conversation = CreateConversation.createConversation(
-        PROJECT_ID,
-        TRANSCRIPT_URI,
-        AUDIO_URI);
+    Conversation conversation =
+        CreateConversation.createConversation(PROJECT_ID, TRANSCRIPT_URI, AUDIO_URI);
     conversationName = conversation.getName();
     assertThat(bout.toString()).contains(conversationName);
   }
