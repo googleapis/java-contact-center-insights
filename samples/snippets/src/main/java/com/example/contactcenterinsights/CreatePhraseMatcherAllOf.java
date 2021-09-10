@@ -21,10 +21,10 @@ package com.example.contactcenterinsights;
 import com.google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient;
 import com.google.cloud.contactcenterinsights.v1.ExactMatchConfig;
 import com.google.cloud.contactcenterinsights.v1.LocationName;
-import com.google.cloud.contactcenterinsights.v1.PhraseMatcher;
 import com.google.cloud.contactcenterinsights.v1.PhraseMatchRule;
 import com.google.cloud.contactcenterinsights.v1.PhraseMatchRuleConfig;
 import com.google.cloud.contactcenterinsights.v1.PhraseMatchRuleGroup;
+import com.google.cloud.contactcenterinsights.v1.PhraseMatcher;
 
 public class CreatePhraseMatcherAllOf {
 
@@ -41,9 +41,6 @@ public class CreatePhraseMatcherAllOf {
     // once, and can be reused for multiple requests. After completing all of your requests, call
     // the "close" method on the client to safely clean up any remaining background resources.
     try (ContactCenterInsightsClient client = ContactCenterInsightsClient.create()) {
-      // Construct a parent resource.
-      LocationName parent = LocationName.of(projectId, "us-central1");
-
       // Construct a phrase matcher that matches all of its rule groups.
       PhraseMatcher.Builder phraseMatcher =
           PhraseMatcher.newBuilder()
@@ -90,6 +87,9 @@ public class CreatePhraseMatcherAllOf {
         ruleGroup2.addPhraseMatchRules(rule.build());
       }
       phraseMatcher.addPhraseMatchRuleGroups(ruleGroup2.build());
+
+      // Construct a parent resource.
+      LocationName parent = LocationName.of(projectId, "us-central1");
 
       // Call the Insights client to create a phrase matcher.
       PhraseMatcher response = client.createPhraseMatcher(parent, phraseMatcher.build());
