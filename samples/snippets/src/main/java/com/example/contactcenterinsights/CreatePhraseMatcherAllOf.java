@@ -49,41 +49,35 @@ public class CreatePhraseMatcherAllOf {
               .setActive(true);
 
       // Construct a rule group to match the word "PHONE" or "CELLPHONE", ignoring case sensitivity.
-      PhraseMatchRuleGroup.Builder ruleGroup1 = PhraseMatchRuleGroup.newBuilder()
-          .setTypeValue(2);
+      PhraseMatchRuleGroup.Builder ruleGroup1 = PhraseMatchRuleGroup.newBuilder().setTypeValue(2);
 
       String[] words1 = {"PHONE", "CELLPHONE"};
       for (String w : words1) {
-        PhraseMatchRule.Builder rule = PhraseMatchRule.newBuilder()
-            .setQuery(w)
-            .setConfig(
-                PhraseMatchRuleConfig.newBuilder()
-                    .setExactMatchConfig(
-                        ExactMatchConfig.newBuilder().build()
-                    )
-                    .build()
-            );
+        PhraseMatchRule.Builder rule =
+            PhraseMatchRule.newBuilder()
+                .setQuery(w)
+                .setConfig(
+                    PhraseMatchRuleConfig.newBuilder()
+                        .setExactMatchConfig(ExactMatchConfig.newBuilder().build())
+                        .build());
         ruleGroup1.addPhraseMatchRules(rule.build());
       }
       phraseMatcher.addPhraseMatchRuleGroups(ruleGroup1.build());
 
       // Construct another rule group to not match the word "SHIPPING" or "DELIVERY",
       // ignoring case sensitivity.
-      PhraseMatchRuleGroup.Builder ruleGroup2 = PhraseMatchRuleGroup.newBuilder()
-          .setTypeValue(1);
+      PhraseMatchRuleGroup.Builder ruleGroup2 = PhraseMatchRuleGroup.newBuilder().setTypeValue(1);
 
       String[] words2 = {"SHIPPING", "DELIVERY"};
       for (String w : words2) {
-        PhraseMatchRule.Builder rule = PhraseMatchRule.newBuilder()
-            .setQuery(w)
-            .setNegated(true)
-            .setConfig(
-                PhraseMatchRuleConfig.newBuilder()
-                    .setExactMatchConfig(
-                        ExactMatchConfig.newBuilder().build()
-                    )
-                    .build()
-            );
+        PhraseMatchRule.Builder rule =
+            PhraseMatchRule.newBuilder()
+                .setQuery(w)
+                .setNegated(true)
+                .setConfig(
+                    PhraseMatchRuleConfig.newBuilder()
+                        .setExactMatchConfig(ExactMatchConfig.newBuilder().build())
+                        .build());
         ruleGroup2.addPhraseMatchRules(rule.build());
       }
       phraseMatcher.addPhraseMatchRuleGroups(ruleGroup2.build());

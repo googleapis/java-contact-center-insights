@@ -49,20 +49,17 @@ public class CreatePhraseMatcherAnyOf {
               .setActive(true);
 
       // Construct a rule group to match the word "PHONE" or "CELLPHONE", ignoring case sensitivity.
-      PhraseMatchRuleGroup.Builder ruleGroup = PhraseMatchRuleGroup.newBuilder()
-          .setTypeValue(2);
+      PhraseMatchRuleGroup.Builder ruleGroup = PhraseMatchRuleGroup.newBuilder().setTypeValue(2);
 
       String[] words = {"PHONE", "CELLPHONE"};
       for (String w : words) {
-        PhraseMatchRule.Builder rule = PhraseMatchRule.newBuilder()
-            .setQuery(w)
-            .setConfig(
-                PhraseMatchRuleConfig.newBuilder()
-                    .setExactMatchConfig(
-                        ExactMatchConfig.newBuilder().build()
-                    )
-                    .build()
-            );
+        PhraseMatchRule.Builder rule =
+            PhraseMatchRule.newBuilder()
+                .setQuery(w)
+                .setConfig(
+                    PhraseMatchRuleConfig.newBuilder()
+                        .setExactMatchConfig(ExactMatchConfig.newBuilder().build())
+                        .build());
         ruleGroup.addPhraseMatchRules(rule.build());
       }
       phraseMatcher.addPhraseMatchRuleGroups(ruleGroup.build());

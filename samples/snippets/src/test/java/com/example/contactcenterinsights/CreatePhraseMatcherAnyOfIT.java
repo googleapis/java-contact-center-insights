@@ -65,8 +65,7 @@ public class CreatePhraseMatcherAnyOfIT {
 
   @Test
   public void testCreatePhraseMatcherAnyOf() throws java.io.IOException {
-    PhraseMatcher phraseMatcher =
-        CreatePhraseMatcherAnyOf.createPhraseMatcherAnyOf(PROJECT_ID);
+    PhraseMatcher phraseMatcher = CreatePhraseMatcherAnyOf.createPhraseMatcherAnyOf(PROJECT_ID);
     phraseMatcherName = phraseMatcher.getName();
     assertThat(bout.toString()).contains(phraseMatcherName);
   }

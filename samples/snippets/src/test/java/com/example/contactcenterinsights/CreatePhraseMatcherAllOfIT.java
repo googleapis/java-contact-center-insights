@@ -65,8 +65,7 @@ public class CreatePhraseMatcherAllOfIT {
 
   @Test
   public void testCreatePhraseMatcherAllOf() throws java.io.IOException {
-    PhraseMatcher phraseMatcher =
-        CreatePhraseMatcherAllOf.createPhraseMatcherAllOf(PROJECT_ID);
+    PhraseMatcher phraseMatcher = CreatePhraseMatcherAllOf.createPhraseMatcherAllOf(PROJECT_ID);
     phraseMatcherName = phraseMatcher.getName();
     assertThat(bout.toString()).contains(phraseMatcherName);
   }
