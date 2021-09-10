@@ -67,10 +67,8 @@ public class CreateConversationWithTtlIT {
 
   @Test
   public void testCreateConversationWithTtl() throws java.io.IOException {
-    Conversation conversation = CreateConversationWithTtl.createConversationWithTtl(
-        PROJECT_ID,
-        TRANSCRIPT_URI,
-        AUDIO_URI);
+    Conversation conversation =
+        CreateConversationWithTtl.createConversationWithTtl(PROJECT_ID, TRANSCRIPT_URI, AUDIO_URI);
     conversationName = conversation.getName();
     assertThat(bout.toString()).contains(conversationName);
   }
