@@ -25,18 +25,18 @@ import com.google.cloud.contactcenterinsights.v1.PhraseMatchRule;
 import com.google.cloud.contactcenterinsights.v1.PhraseMatchRuleConfig;
 import com.google.cloud.contactcenterinsights.v1.PhraseMatchRuleGroup;
 import com.google.cloud.contactcenterinsights.v1.PhraseMatcher;
+import java.io.IOException;
 
 public class CreatePhraseMatcherAnyOf {
 
-  public static void main(String[] args) throws java.io.IOException {
+  public static void main(String[] args) throws IOException {
     // TODO(developer): Replace this variable before running the sample.
     String projectId = "my_project_id";
 
     createPhraseMatcherAnyOf(projectId);
   }
 
-  public static PhraseMatcher createPhraseMatcherAnyOf(String projectId)
-      throws java.io.IOException {
+  public static PhraseMatcher createPhraseMatcherAnyOf(String projectId) throws IOException {
     // Initialize client that will be used to send requests. This client only needs to be created
     // once, and can be reused for multiple requests. After completing all of your requests, call
     // the "close" method on the client to safely clean up any remaining background resources.

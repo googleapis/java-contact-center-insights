@@ -22,6 +22,7 @@ import static junit.framework.TestCase.assertNotNull;
 import com.google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient;
 import com.google.cloud.contactcenterinsights.v1.PhraseMatcher;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import org.junit.After;
 import org.junit.Before;
@@ -56,7 +57,7 @@ public class CreatePhraseMatcherAnyOfIT {
   }
 
   @After
-  public void tearDown() throws java.io.IOException {
+  public void tearDown() throws IOException {
     try (ContactCenterInsightsClient client = ContactCenterInsightsClient.create()) {
       client.deletePhraseMatcher(phraseMatcherName);
     }
@@ -64,7 +65,7 @@ public class CreatePhraseMatcherAnyOfIT {
   }
 
   @Test
-  public void testCreatePhraseMatcherAnyOf() throws java.io.IOException {
+  public void testCreatePhraseMatcherAnyOf() throws IOException {
     PhraseMatcher phraseMatcher = CreatePhraseMatcherAnyOf.createPhraseMatcherAnyOf(PROJECT_ID);
     phraseMatcherName = phraseMatcher.getName();
     assertThat(bout.toString()).contains(phraseMatcherName);
