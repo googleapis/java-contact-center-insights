@@ -27,7 +27,7 @@ import com.google.cloud.contactcenterinsights.v1.LocationName;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.lang.InterruptedException;
+import java.lang.Exception;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -96,7 +96,7 @@ public class CreateIssueModelIT {
   }
 
   @Test
-  public void testCreateIssueModel() throws InterruptedException, IOException {
+  public void testCreateIssueModel() throws Exception, IOException {
     if (conversationCount >= MIN_CONVERSATION_COUNT) {
       IssueModel issueModel = CreateIssueModel.createIssueModel(PROJECT_ID);
       issueModelName = issueModel.getName();

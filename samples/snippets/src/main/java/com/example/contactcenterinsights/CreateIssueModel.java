@@ -23,7 +23,7 @@ import com.google.cloud.contactcenterinsights.v1.Conversation;
 import com.google.cloud.contactcenterinsights.v1.IssueModel;
 import com.google.cloud.contactcenterinsights.v1.LocationName;
 import java.io.IOException;
-import java.lang.InterruptedException;
+import java.lang.Exception;
 
 public class CreateIssueModel {
 
@@ -34,8 +34,7 @@ public class CreateIssueModel {
     createIssueModel(projectId);
   }
 
-  public static IssueModel createIssueModel(String projectId)
-      throws InterruptedException, IOException {
+  public static IssueModel createIssueModel(String projectId) throws Exception, IOException {
     // Initialize client that will be used to send requests. This client only needs to be created
     // once, and can be reused for multiple requests. After completing all of your requests, call
     // the "close" method on the client to safely clean up any remaining background resources.
@@ -57,7 +56,7 @@ public class CreateIssueModel {
       try {
         response = client.createIssueModelAsync(parent, issueModel).get();
         System.out.printf("Created %s%n", response.getName());
-      } catch (InterruptedException exception) {
+      } catch (Exception exception) {
         throw exception;
       }
       return response;
