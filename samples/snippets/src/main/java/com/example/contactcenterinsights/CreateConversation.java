@@ -24,10 +24,11 @@ import com.google.cloud.contactcenterinsights.v1.ConversationDataSource;
 import com.google.cloud.contactcenterinsights.v1.CreateConversationRequest;
 import com.google.cloud.contactcenterinsights.v1.GcsSource;
 import com.google.cloud.contactcenterinsights.v1.LocationName;
+import java.io.IOException;
 
 public class CreateConversation {
 
-  public static void main(String[] args) throws java.io.IOException {
+  public static void main(String[] args) throws IOException {
     // TODO(developer): Replace these variables before running the sample.
     String projectId = "my_project_id";
     String transcriptUri = "gs://cloud-samples-data/ccai/chat_sample.json";
@@ -37,7 +38,7 @@ public class CreateConversation {
   }
 
   public static Conversation createConversation(
-      String projectId, String transcriptUri, String audioUri) throws java.io.IOException {
+      String projectId, String transcriptUri, String audioUri) throws IOException {
     // Initialize client that will be used to send requests. This client only needs to be created
     // once, and can be reused for multiple requests. After completing all of your requests, call
     // the "close" method on the client to safely clean up any remaining background resources.
