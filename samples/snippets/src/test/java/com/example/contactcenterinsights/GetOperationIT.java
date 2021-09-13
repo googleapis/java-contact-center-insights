@@ -20,7 +20,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static junit.framework.TestCase.assertNotNull;
 
 import com.google.api.gax.rpc.ApiException;
-import com.google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient;
 import com.google.longrunning.Operation;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -64,8 +63,8 @@ public class GetOperationIT {
   @Test
   public void testGetOperation() throws java.io.IOException {
     // TODO(developer): Replace this variable with your operation name.
-    String operationName = String.format(
-        "projects/%s/locations/us-central1/operations/12345", PROJECT_ID);
+    String operationName =
+        String.format("projects/%s/locations/us-central1/operations/12345", PROJECT_ID);
 
     try {
       Operation operation = GetOperation.getOperation(operationName);

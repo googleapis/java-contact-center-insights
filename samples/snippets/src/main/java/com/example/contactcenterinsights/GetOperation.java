@@ -31,8 +31,7 @@ public class GetOperation {
     getOperation(operationName);
   }
 
-  public static Operation getOperation(String operationName)
-      throws java.io.IOException {
+  public static Operation getOperation(String operationName) throws java.io.IOException {
     // Initialize client that will be used to send requests. This client only needs to be created
     // once, and can be reused for multiple requests. After completing all of your requests, call
     // the "close" method on the client to safely clean up any remaining background resources.
