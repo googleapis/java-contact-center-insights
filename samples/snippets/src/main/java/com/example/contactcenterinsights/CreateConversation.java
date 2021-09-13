@@ -26,7 +26,7 @@ import com.google.cloud.contactcenterinsights.v1.GcsSource;
 import com.google.cloud.contactcenterinsights.v1.LocationName;
 import java.io.IOException;
 
-public class CreateConversation { // test
+public class CreateConversation {
 
   public static void main(String[] args) throws IOException {
     // TODO(developer): Replace these variables before running the sample.
