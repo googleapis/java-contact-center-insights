@@ -22,17 +22,19 @@ import com.google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient;
 import com.google.cloud.contactcenterinsights.v1.Conversation;
 import com.google.cloud.contactcenterinsights.v1.IssueModel;
 import com.google.cloud.contactcenterinsights.v1.LocationName;
+import java.io.IOException;
+import java.lang.InterruptedException;
 
 public class CreateIssueModel {
 
-  public static void main(String[] args) throws java.io.IOException {
+  public static void main(String[] args) throws IOException {
     // TODO(developer): Replace this variable before running the sample.
     String projectId = "my_project_id";
 
     createIssueModel(projectId);
   }
 
-  public static IssueModel createIssueModel(String projectId) throws java.io.IOException {
+  public static IssueModel createIssueModel(String projectId) throws IOException {
     // Initialize client that will be used to send requests. This client only needs to be created
     // once, and can be reused for multiple requests. After completing all of your requests, call
     // the "close" method on the client to safely clean up any remaining background resources.
@@ -50,8 +52,13 @@ public class CreateIssueModel {
               .build();
 
       // Call the Insights client to create an issue model.
-      IssueModel response = client.createIssueModelAsync(parent, issueModel).get();
-      System.out.printf("Created %s%n", response.getName());
+      IssueModel response;
+      try {
+        response = client.createIssueModelAsync(parent, issueModel).get();
+        System.out.printf("Created %s%n", response.getName());
+      } catch (InterruptedException exception) {
+        throw exception;
+      }
       return response;
     }
   }

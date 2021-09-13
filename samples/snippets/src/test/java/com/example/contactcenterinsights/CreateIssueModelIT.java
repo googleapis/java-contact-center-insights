@@ -25,6 +25,7 @@ import com.google.cloud.contactcenterinsights.v1.ListConversationsRequest;
 import com.google.cloud.contactcenterinsights.v1.ListConversationsResponse;
 import com.google.cloud.contactcenterinsights.v1.LocationName;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import org.junit.After;
 import org.junit.Before;
@@ -54,7 +55,7 @@ public class CreateIssueModelIT {
   }
 
   @Before
-  public void setUp() throws java.io.IOException {
+  public void setUp() throws IOException {
     bout = new ByteArrayOutputStream();
     out = new PrintStream(bout);
     System.setOut(out);
@@ -86,7 +87,7 @@ public class CreateIssueModelIT {
   }
 
   @After
-  public void tearDown() throws java.io.IOException {
+  public void tearDown() throws IOException {
     try (ContactCenterInsightsClient client = ContactCenterInsightsClient.create()) {
       client.deleteIssueModel(issueModelName);
     }
@@ -94,7 +95,7 @@ public class CreateIssueModelIT {
   }
 
   @Test
-  public void testCreateIssueModel() throws java.io.IOException {
+  public void testCreateIssueModel() throws IOException {
     if (conversationCount >= MIN_CONVERSATION_COUNT) {
       IssueModel issueModel = CreateIssueModel.createIssueModel(PROJECT_ID);
       issueModelName = issueModel.getName();
