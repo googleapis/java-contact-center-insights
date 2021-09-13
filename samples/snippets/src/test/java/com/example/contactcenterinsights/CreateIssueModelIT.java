@@ -79,7 +79,7 @@ public class CreateIssueModelIT {
         }
         conversationCount += listResponse.getConversationsCount();
 
-        if (!Strings.isNullOrEmpty(listResponse.getNextPageToken())) {
+        if (listResponse.getNextPageToken().isEmpty()) {
           break;
         }
         listRequest.setPageToken(listResponse.getNextPageToken());
