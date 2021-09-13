@@ -41,17 +41,14 @@ public class SetProjectTtl {
     try (ContactCenterInsightsClient client = ContactCenterInsightsClient.create()) {
       // Construct a settings resource.
       SettingsName name = SettingsName.of(projectId, "us-central1");
-      Settings settings = Settings.newBuilder()
-          .setName(name.toString())
-          .setConversationTtl(Duration.newBuilder()
-              .setSeconds(60)
-              .build())
-          .build();
+      Settings settings =
+          Settings.newBuilder()
+              .setName(name.toString())
+              .setConversationTtl(Duration.newBuilder().setSeconds(60).build())
+              .build();
 
       // Construct an update mask.
-      FieldMask updateMask = FieldMask.newBuilder()
-          .addPaths("conversation_ttl")
-          .build();
+      FieldMask updateMask = FieldMask.newBuilder().addPaths("conversation_ttl").build();
 
       // Call the Insights client to set a project-level TTL.
       Settings response = client.updateSettings(settings, updateMask);

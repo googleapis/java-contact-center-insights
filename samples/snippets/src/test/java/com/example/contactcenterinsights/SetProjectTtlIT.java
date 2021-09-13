@@ -63,14 +63,13 @@ public class SetProjectTtlIT {
     try (ContactCenterInsightsClient client = ContactCenterInsightsClient.create()) {
       // Clear project-level TTL.
       SettingsName name = SettingsName.of(PROJECT_ID, "us-central1");
-      Settings settings = Settings.newBuilder()
-          .setName(name.toString())
-          .setConversationTtl(Duration.newBuilder().build())
-          .build();
+      Settings settings =
+          Settings.newBuilder()
+              .setName(name.toString())
+              .setConversationTtl(Duration.newBuilder().build())
+              .build();
 
-      FieldMask updateMask = FieldMask.newBuilder()
-          .addPaths("conversation_ttl")
-          .build();
+      FieldMask updateMask = FieldMask.newBuilder().addPaths("conversation_ttl").build();
 
       Settings response = client.updateSettings(settings, updateMask);
     }
