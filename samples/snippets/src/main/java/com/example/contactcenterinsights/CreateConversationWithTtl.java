@@ -27,7 +27,7 @@ import com.google.cloud.contactcenterinsights.v1.LocationName;
 import com.google.protobuf.Duration;
 import java.io.IOException;
 
-public class CreateConversationWithTtl { // test
+public class CreateConversationWithTtl {
 
   public static void main(String[] args) throws IOException {
     // TODO(developer): Replace these variables before running the sample.
