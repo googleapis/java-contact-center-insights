@@ -27,7 +27,7 @@ import java.lang.Exception;
 
 public class CreateIssueModel {
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws Exception, IOException {
     // TODO(developer): Replace this variable before running the sample.
     String projectId = "my_project_id";
 
