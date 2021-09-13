@@ -22,6 +22,7 @@ import static junit.framework.TestCase.assertNotNull;
 import com.google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient;
 import com.google.cloud.contactcenterinsights.v1.Conversation;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import org.junit.After;
 import org.junit.Before;
@@ -58,7 +59,7 @@ public class CreateConversationWithTtlIT {
   }
 
   @After
-  public void tearDown() throws java.io.IOException {
+  public void tearDown() throws IOException {
     try (ContactCenterInsightsClient client = ContactCenterInsightsClient.create()) {
       client.deleteConversation(conversationName);
     }
@@ -66,7 +67,7 @@ public class CreateConversationWithTtlIT {
   }
 
   @Test
-  public void testCreateConversationWithTtl() throws java.io.IOException {
+  public void testCreateConversationWithTtl() throws IOException {
     Conversation conversation =
         CreateConversationWithTtl.createConversationWithTtl(PROJECT_ID, TRANSCRIPT_URI, AUDIO_URI);
     conversationName = conversation.getName();
