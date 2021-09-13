@@ -21,17 +21,18 @@ package com.example.contactcenterinsights;
 import com.google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient;
 import com.google.longrunning.Operation;
 import com.google.longrunning.OperationsClient;
+import java.io.IOException;
 
 public class GetOperation {
 
-  public static void main(String[] args) throws java.io.IOException {
+  public static void main(String[] args) throws IOException {
     // TODO(developer): Replace this variable before running the sample.
     String operationName = "projects/my_project_id/locations/us-central1/operations/12345";
 
     getOperation(operationName);
   }
 
-  public static Operation getOperation(String operationName) throws java.io.IOException {
+  public static Operation getOperation(String operationName) throws IOException {
     // Initialize client that will be used to send requests. This client only needs to be created
     // once, and can be reused for multiple requests. After completing all of your requests, call
     // the "close" method on the client to safely clean up any remaining background resources.

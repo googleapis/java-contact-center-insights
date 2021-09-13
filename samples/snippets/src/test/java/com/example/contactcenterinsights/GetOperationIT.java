@@ -22,6 +22,7 @@ import static junit.framework.TestCase.assertNotNull;
 import com.google.api.gax.rpc.ApiException;
 import com.google.longrunning.Operation;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import org.junit.After;
 import org.junit.Before;
@@ -56,12 +57,12 @@ public class GetOperationIT {
   }
 
   @After
-  public void tearDown() throws java.io.IOException {
+  public void tearDown() throws IOException {
     System.setOut(null);
   }
 
   @Test
-  public void testGetOperation() throws java.io.IOException {
+  public void testGetOperation() throws IOException {
     // TODO(developer): Replace this variable with your operation name.
     String operationName =
         String.format("projects/%s/locations/us-central1/operations/12345", PROJECT_ID);
