@@ -60,9 +60,9 @@ public class CreateIssueModelIT {
     out = new PrintStream(bout);
     System.setOut(out);
 
+    // Check if the project has the minimum number of conversations required to create
+    // an issue model. See https://cloud.google.com/contact-center/insights/docs/topic-model.
     try (ContactCenterInsightsClient client = ContactCenterInsightsClient.create()) {
-      // Check if the project has the minimum number of conversations required to create
-      // an issue model. See https://cloud.google.com/contact-center/insights/docs/topic-model.
       LocationName parent = LocationName.of(PROJECT_ID, "us-central1");
       ListConversationsRequest.Builder listRequest =
           ListConversationsRequest.newBuilder().setParent(parent.toString()).setPageSize(1000);
