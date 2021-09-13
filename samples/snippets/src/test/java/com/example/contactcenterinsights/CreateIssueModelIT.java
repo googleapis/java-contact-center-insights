@@ -89,11 +89,13 @@ public class CreateIssueModelIT {
 
   @After
   public void tearDown() throws Exception, IOException {
-    try (ContactCenterInsightsClient client = ContactCenterInsightsClient.create()) {
-      try {
-        client.deleteIssueModelAsync(issueModelName);
-      } catch (Exception exception) {
-        throw exception;
+    if (conversationCount >= MIN_CONVERSATION_COUNT) {
+      try (ContactCenterInsightsClient client = ContactCenterInsightsClient.create()) {
+        try {
+          client.deleteIssueModelAsync(issueModelName);
+        } catch (Exception exception) {
+          throw exception;
+        }
       }
     }
     System.setOut(null);
