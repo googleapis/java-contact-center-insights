@@ -27,7 +27,6 @@ import com.google.cloud.contactcenterinsights.v1.LocationName;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.lang.Exception;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -65,9 +64,8 @@ public class CreateIssueModelIT {
       // Check if the project has the minimum number of conversations required to create
       // an issue model. See https://cloud.google.com/contact-center/insights/docs/topic-model.
       LocationName parent = LocationName.of(PROJECT_ID, "us-central1");
-      ListConversationsRequest.Builder listRequest = ListConversationsRequest.newBuilder()
-          .setParent(parent.toString())
-          .setPageSize(1000);
+      ListConversationsRequest.Builder listRequest =
+          ListConversationsRequest.newBuilder().setParent(parent.toString()).setPageSize(1000);
 
       conversationCount = 0;
       while (conversationCount < MIN_CONVERSATION_COUNT) {

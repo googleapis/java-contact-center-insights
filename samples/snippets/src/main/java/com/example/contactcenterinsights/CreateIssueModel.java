@@ -23,7 +23,6 @@ import com.google.cloud.contactcenterinsights.v1.Conversation;
 import com.google.cloud.contactcenterinsights.v1.IssueModel;
 import com.google.cloud.contactcenterinsights.v1.LocationName;
 import java.io.IOException;
-import java.lang.Exception;
 
 public class CreateIssueModel {
 
@@ -46,9 +45,10 @@ public class CreateIssueModel {
       IssueModel issueModel =
           IssueModel.newBuilder()
               .setDisplayName("my-model")
-              .setInputDataConfig(IssueModel.InputDataConfig.newBuilder()
-                  .setMedium(Conversation.Medium.CHAT)
-                  .build())
+              .setInputDataConfig(
+                  IssueModel.InputDataConfig.newBuilder()
+                      .setMedium(Conversation.Medium.CHAT)
+                      .build())
               .build();
 
       // Call the Insights client to create an issue model.
