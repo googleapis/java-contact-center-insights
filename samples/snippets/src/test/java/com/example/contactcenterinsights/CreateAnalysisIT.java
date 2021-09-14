@@ -95,8 +95,8 @@ public class CreateAnalysisIT {
   public void tearDown() throws Exception, IOException {
     // Delete the conversation.
     try (ContactCenterInsightsClient client = ContactCenterInsightsClient.create()) {
-      DeleteConversationRequest request = DeleteConversationRequest.newBuilder()
-          .setName(conversationName).setForce(true).build();
+      DeleteConversationRequest request =
+          DeleteConversationRequest.newBuilder().setName(conversationName).setForce(true).build();
       client.deleteConversation(request);
     }
     System.setOut(null);
