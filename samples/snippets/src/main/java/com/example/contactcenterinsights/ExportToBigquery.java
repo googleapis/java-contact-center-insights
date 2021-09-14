@@ -45,16 +45,17 @@ public class ExportToBigquery {
     try (ContactCenterInsightsClient client = ContactCenterInsightsClient.create()) {
       // Construct an export request.
       LocationName parent = LocationName.of(projectId, "us-central1");
-      ExportInsightsDataRequest request = ExportInsightsDataRequest.newBuilder()
-          .setParent(parent.toString())
-          .setBigQueryDestination(
-              ExportInsightsDataRequest.BigQueryDestination.newBuilder()
-                  .setProjectId(bigqueryProjectId)
-                  .setDataset(bigqueryDataset)
-                  .setTable(bigqueryTable)
-                  .build())
-          .setFilter("agent_id=\"007\"")
-          .build();
+      ExportInsightsDataRequest request =
+          ExportInsightsDataRequest.newBuilder()
+              .setParent(parent.toString())
+              .setBigQueryDestination(
+                  ExportInsightsDataRequest.BigQueryDestination.newBuilder()
+                      .setProjectId(bigqueryProjectId)
+                      .setDataset(bigqueryDataset)
+                      .setTable(bigqueryTable)
+                      .build())
+              .setFilter("agent_id=\"007\"")
+              .build();
 
       // Call the Insights client to export data to BigQuery.
       ExportInsightsDataResponse response = client.exportInsightsDataAsync(request).get();

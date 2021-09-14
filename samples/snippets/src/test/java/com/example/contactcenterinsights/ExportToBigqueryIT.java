@@ -31,7 +31,6 @@ import com.google.cloud.bigquery.Table;
 import com.google.cloud.bigquery.TableDefinition;
 import com.google.cloud.bigquery.TableId;
 import com.google.cloud.bigquery.TableInfo;
-import com.google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -73,23 +72,23 @@ public class ExportToBigqueryIT {
     System.setOut(out);
 
     // Generate BigQuery table and dataset IDs.
-    bigqueryDatasetId = String.format("%s_%s", GCLOUD_TESTS_PREFIX,
-        UUID.randomUUID().toString().replace("-", "_"));
-    bigqueryTableId = String.format("%s_%s", GCLOUD_TESTS_PREFIX,
-        UUID.randomUUID().toString().replace("-", "_"));
+    bigqueryDatasetId =
+        String.format("%s_%s", GCLOUD_TESTS_PREFIX, UUID.randomUUID().toString().replace("-", "_"));
+    bigqueryTableId =
+        String.format("%s_%s", GCLOUD_TESTS_PREFIX, UUID.randomUUID().toString().replace("-", "_"));
 
     // Create a BigQuery dataset.
     BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    DatasetInfo datasetInfo = DatasetInfo.newBuilder(
-        DatasetId.of(BIGQUERY_PROJECT_ID, bigqueryDatasetId)).build();
+    DatasetInfo datasetInfo =
+        DatasetInfo.newBuilder(DatasetId.of(BIGQUERY_PROJECT_ID, bigqueryDatasetId)).build();
     Dataset dataset = bigquery.create(datasetInfo);
 
     // Create a BigQuery table under the created dataset.
     Schema schema = Schema.of(new ArrayList<>());
     TableDefinition tableDefinition = StandardTableDefinition.of(schema);
-    TableInfo tableInfo = TableInfo.newBuilder(
-            TableId.of(bigqueryDatasetId, bigqueryTableId), tableDefinition)
-        .build();
+    TableInfo tableInfo =
+        TableInfo.newBuilder(TableId.of(bigqueryDatasetId, bigqueryTableId), tableDefinition)
+            .build();
     Table table = bigquery.create(tableInfo);
   }
 
@@ -97,8 +96,10 @@ public class ExportToBigqueryIT {
   public void tearDown() throws BigQueryException {
     // Delete the BigQuery dataset and table.
     BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    boolean success = bigquery.delete(DatasetId.of(PROJECT_ID, bigqueryDatasetId),
-        BigQuery.DatasetDeleteOption.deleteContents());
+    boolean success =
+        bigquery.delete(
+            DatasetId.of(PROJECT_ID, bigqueryDatasetId),
+            BigQuery.DatasetDeleteOption.deleteContents());
     System.setOut(null);
   }
 
