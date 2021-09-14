@@ -41,8 +41,7 @@ public class CreateAnalysis {
       Analysis analysis = Analysis.newBuilder().build();
 
       // Call the Insights client to create an analysis.
-      Analysis response;
-      response = client.createAnalysisAsync(conversationName, analysis).get();
+      Analysis response = client.createAnalysisAsync(conversationName, analysis).get();
       System.out.printf("Created %s%n", response.getName());
       return response;
     }
