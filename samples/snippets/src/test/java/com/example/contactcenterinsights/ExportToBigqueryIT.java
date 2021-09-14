@@ -19,7 +19,6 @@ package com.example.contactcenterinsights;
 import static com.google.common.truth.Truth.assertThat;
 import static junit.framework.TestCase.assertNotNull;
 
-import com.google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient;
 import com.google.cloud.bigquery.BigQuery;
 import com.google.cloud.bigquery.BigQueryException;
 import com.google.cloud.bigquery.BigQueryOptions;
@@ -32,12 +31,13 @@ import com.google.cloud.bigquery.Table;
 import com.google.cloud.bigquery.TableDefinition;
 import com.google.cloud.bigquery.TableId;
 import com.google.cloud.bigquery.TableInfo;
+import com.google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.concurrent.CancellationException;
 import java.util.UUID;
+import java.util.concurrent.CancellationException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -109,6 +109,7 @@ public class ExportToBigqueryIT {
           PROJECT_ID, BIGQUERY_PROJECT_ID, bigqueryDatasetId, bigqueryTableId);
       assertThat(bout.toString()).contains("Exported data to BigQuery");
     } catch (CancellationException exception) {
+      // Ignore cancellation request.
     }
   }
 }
