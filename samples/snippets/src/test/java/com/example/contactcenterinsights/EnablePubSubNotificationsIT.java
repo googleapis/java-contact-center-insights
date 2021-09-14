@@ -66,8 +66,7 @@ public class EnablePubSubNotificationsIT {
     try (TopicAdminClient topicAdminClient = TopicAdminClient.create()) {
       String conversationTopicId =
           String.format("create-conversation-%s", UUID.randomUUID().toString());
-      String analysisTopicId =
-          String.format("create-analysis-%s", UUID.randomUUID().toString());
+      String analysisTopicId = String.format("create-analysis-%s", UUID.randomUUID().toString());
 
       conversationTopic = TopicName.of(PROJECT_ID, conversationTopicId).toString();
       analysisTopic = TopicName.of(PROJECT_ID, analysisTopicId).toString();
@@ -85,14 +84,10 @@ public class EnablePubSubNotificationsIT {
     try (ContactCenterInsightsClient client = ContactCenterInsightsClient.create()) {
       SettingsName name = SettingsName.of(PROJECT_ID, "us-central1");
       Settings settings =
-          Settings.newBuilder()
-              .setName(name.toString())
-              .clearPubsubNotificationSettings()
-              .build();
+          Settings.newBuilder().setName(name.toString()).clearPubsubNotificationSettings().build();
 
-      FieldMask updateMask = FieldMask.newBuilder()
-          .addPaths("pubsub_notification_settings")
-          .build();
+      FieldMask updateMask =
+          FieldMask.newBuilder().addPaths("pubsub_notification_settings").build();
 
       Settings response = client.updateSettings(settings, updateMask);
     }

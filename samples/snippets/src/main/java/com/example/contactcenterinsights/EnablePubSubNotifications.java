@@ -36,9 +36,7 @@ public class EnablePubSubNotifications {
   }
 
   public static void enablePubSubNotifications(
-      String projectId,
-      String topicCreateConversation,
-      String topicCreateAnalysis)
+      String projectId, String topicCreateConversation, String topicCreateAnalysis)
       throws IOException {
     // Initialize client that will be used to send requests. This client only needs to be created
     // once, and can be reused for multiple requests. After completing all of your requests, call
@@ -54,9 +52,8 @@ public class EnablePubSubNotifications {
               .build();
 
       // Construct an update mask.
-      FieldMask updateMask = FieldMask.newBuilder()
-          .addPaths("pubsub_notification_settings")
-          .build();
+      FieldMask updateMask =
+          FieldMask.newBuilder().addPaths("pubsub_notification_settings").build();
 
       // Call the Insights client to enable Pub/Sub notifications.
       Settings response = client.updateSettings(settings, updateMask);
