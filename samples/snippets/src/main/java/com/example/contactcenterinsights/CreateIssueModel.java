@@ -52,13 +52,8 @@ public class CreateIssueModel {
               .build();
 
       // Call the Insights client to create an issue model.
-      IssueModel response;
-      try {
-        response = client.createIssueModelAsync(parent, issueModel).get();
-        System.out.printf("Created %s%n", response.getName());
-      } catch (Exception exception) {
-        throw exception;
-      }
+      IssueModel response = client.createIssueModelAsync(parent, issueModel).get();
+      System.out.printf("Created %s%n", response.getName());
       return response;
     }
   }
