@@ -59,7 +59,7 @@ public class CreateConversationWithTtl {
                               .build())
                       .build())
               .setMedium(Conversation.Medium.CHAT)
-              .setTtl(Duration.newBuilder().setSeconds(60).build())
+              .setTtl(Duration.newBuilder().setSeconds(86400).build())
               .build();
 
       // Construct a request.
