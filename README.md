@@ -76,8 +76,8 @@ Samples are in the [`samples/`](https://github.com/googleapis/java-contact-cente
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
+| Create Conversation | [source code](https://github.com/googleapis/java-contact-center-insights/blob/master/samples/snippets/src/main/java/com/example/contactcenterinsights/CreateConversation.java) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/java-contact-center-insights&page=editor&open_in_editor=samples/snippets/src/main/java/com/example/contactcenterinsights/CreateConversation.java) |
 | Enable Pub Sub Notifications | [source code](https://github.com/googleapis/java-contact-center-insights/blob/master/samples/snippets/src/main/java/com/example/contactcenterinsights/EnablePubSubNotifications.java) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/java-contact-center-insights&page=editor&open_in_editor=samples/snippets/src/main/java/com/example/contactcenterinsights/EnablePubSubNotifications.java) |
-
 
 
 ## Troubleshooting
