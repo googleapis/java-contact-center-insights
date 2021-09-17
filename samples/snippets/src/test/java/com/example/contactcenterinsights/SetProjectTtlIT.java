@@ -79,6 +79,6 @@ public class SetProjectTtlIT {
   @Test
   public void testSetProjecTtl() throws IOException {
     SetProjectTtl.setProjectTtl(PROJECT_ID);
-    assertThat(bout.toString()).contains("Set TTL for all incoming conversations to 24 hours");
+    assertThat(bout.toString()).contains("Set TTL for all incoming conversations to 86400 seconds");
   }
 }
