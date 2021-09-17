@@ -45,9 +45,7 @@ public class CreateIssueModel {
           IssueModel.newBuilder()
               .setDisplayName("my-model")
               .setInputDataConfig(
-                  IssueModel.InputDataConfig.newBuilder()
-                      .setFilter("medium=\"CHAT\"")
-                      .build())
+                  IssueModel.InputDataConfig.newBuilder().setFilter("medium=\"CHAT\"").build())
               .build();
 
       // Call the Insights client to create an issue model.
