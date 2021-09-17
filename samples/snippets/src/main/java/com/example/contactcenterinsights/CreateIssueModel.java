@@ -19,7 +19,6 @@ package com.example.contactcenterinsights;
 // [START contactcenterinsights_create_issue_model]
 
 import com.google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient;
-import com.google.cloud.contactcenterinsights.v1.Conversation;
 import com.google.cloud.contactcenterinsights.v1.IssueModel;
 import com.google.cloud.contactcenterinsights.v1.LocationName;
 import java.io.IOException;
@@ -47,7 +46,7 @@ public class CreateIssueModel {
               .setDisplayName("my-model")
               .setInputDataConfig(
                   IssueModel.InputDataConfig.newBuilder()
-                      .setMedium(Conversation.Medium.CHAT)
+                      .setFilter("medium=\"CHAT\"")
                       .build())
               .build();
 
