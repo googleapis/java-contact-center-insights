@@ -44,7 +44,7 @@ public class SetProjectTtl {
       Settings settings =
           Settings.newBuilder()
               .setName(name.toString())
-              .setConversationTtl(Duration.newBuilder().setSeconds(60).build())
+              .setConversationTtl(Duration.newBuilder().setSeconds(86400).build())
               .build();
 
       // Construct an update mask.
@@ -52,7 +52,7 @@ public class SetProjectTtl {
 
       // Call the Insights client to set a project-level TTL.
       Settings response = client.updateSettings(settings, updateMask);
-      System.out.printf("Set TTL for all incoming conversations to 60 seconds");
+      System.out.printf("Set TTL for all incoming conversations to 24 hours");
     }
   }
 }
