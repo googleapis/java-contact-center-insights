@@ -24,8 +24,8 @@ import com.google.cloud.contactcenterinsights.v1.ExportInsightsDataMetadata;
 import com.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest;
 import com.google.cloud.contactcenterinsights.v1.ExportInsightsDataResponse;
 import com.google.cloud.contactcenterinsights.v1.LocationName;
-import java.util.concurrent.TimeUnit;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class ExportToBigquery {
 
