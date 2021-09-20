@@ -18,14 +18,15 @@ package com.example.contactcenterinsights;
 
 // [START contactcenterinsights_export_to_bigquery]
 
-import com.google.api.gax.longrunning.OperationFuture;
+import com.google.api.gax.longrunning.OperationTimedPollAlgorithm;
+import com.google.api.gax.retrying.RetrySettings;
 import com.google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient;
-import com.google.cloud.contactcenterinsights.v1.ExportInsightsDataMetadata;
+import com.google.cloud.contactcenterinsights.v1.ContactCenterInsightsSettings;
 import com.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest;
 import com.google.cloud.contactcenterinsights.v1.ExportInsightsDataResponse;
 import com.google.cloud.contactcenterinsights.v1.LocationName;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+import org.threeten.bp.Duration;
 
 public class ExportToBigquery {
 
@@ -42,10 +43,29 @@ public class ExportToBigquery {
   public static void exportToBigquery(
       String projectId, String bigqueryProjectId, String bigqueryDataset, String bigqueryTable)
       throws Exception, IOException {
+    // Set the operation total polling timeout to 24 hours instead of the 5-minute default.
+    // Other values are copied from the default values of {@link ContactCenterInsightsStubSettings}.
+    ContactCenterInsightsSettings.Builder clientSettings =
+        ContactCenterInsightsSettings.newBuilder();
+    clientSettings
+        .exportInsightsDataOperationSettings()
+        .setPollingAlgorithm(
+            OperationTimedPollAlgorithm.create(
+                RetrySettings.newBuilder()
+                    .setInitialRetryDelay(Duration.ofMillis(5000L))
+                    .setRetryDelayMultiplier(1.5)
+                    .setMaxRetryDelay(Duration.ofMillis(45000L))
+                    .setInitialRpcTimeout(Duration.ZERO)
+                    .setRpcTimeoutMultiplier(1.0)
+                    .setMaxRpcTimeout(Duration.ZERO)
+                    .setTotalTimeout(Duration.ofHours(24L))
+                    .build()));
+
     // Initialize client that will be used to send requests. This client only needs to be created
     // once, and can be reused for multiple requests. After completing all of your requests, call
     // the "close" method on the client to safely clean up any remaining background resources.
-    try (ContactCenterInsightsClient client = ContactCenterInsightsClient.create()) {
+    try (ContactCenterInsightsClient client = ContactCenterInsightsClient.create(
+        clientSettings.build())) {
       // Construct an export request.
       LocationName parent = LocationName.of(projectId, "us-central1");
       ExportInsightsDataRequest request =
@@ -61,9 +81,7 @@ public class ExportToBigquery {
               .build();
 
       // Call the Insights client to export data to BigQuery.
-      OperationFuture<ExportInsightsDataResponse, ExportInsightsDataMetadata>
-          operationFuture = client.exportInsightsDataAsync(request);
-      ExportInsightsDataResponse response = operationFuture.get(600000L, TimeUnit.SECONDS);
+      ExportInsightsDataResponse response = client.exportInsightsDataAsync(request).get();
       System.out.printf("Exported data to BigQuery");
     }
   }
