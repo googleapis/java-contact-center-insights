@@ -18,10 +18,13 @@ package com.example.contactcenterinsights;
 
 // [START contactcenterinsights_export_to_bigquery]
 
+import com.google.api.gax.longrunning.OperationFuture;
 import com.google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient;
+import com.google.cloud.contactcenterinsights.v1.ExportInsightsDataMetadata;
 import com.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest;
 import com.google.cloud.contactcenterinsights.v1.ExportInsightsDataResponse;
 import com.google.cloud.contactcenterinsights.v1.LocationName;
+import java.util.concurrent.TimeUnit;
 import java.io.IOException;
 
 public class ExportToBigquery {
@@ -58,7 +61,9 @@ public class ExportToBigquery {
               .build();
 
       // Call the Insights client to export data to BigQuery.
-      ExportInsightsDataResponse response = client.exportInsightsDataAsync(request).get();
+      OperationFuture<ExportInsightsDataResponse, ExportInsightsDataMetadata>
+          operationFuture = client.exportInsightsDataAsync(request);
+      ExportInsightsDataResponse response = operationFuture.get(600000L, TimeUnit.SECONDS);
       System.out.printf("Exported data to BigQuery");
     }
   }

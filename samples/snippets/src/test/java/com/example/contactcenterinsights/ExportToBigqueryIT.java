@@ -105,12 +105,8 @@ public class ExportToBigqueryIT {
 
   @Test
   public void testExportToBigquery() throws Exception, IOException {
-    try {
-      ExportToBigquery.exportToBigquery(
-          PROJECT_ID, BIGQUERY_PROJECT_ID, bigqueryDatasetId, bigqueryTableId);
-      assertThat(bout.toString()).contains("Exported data to BigQuery");
-    } catch (CancellationException exception) {
-      // Ignore cancellation request.
-    }
+    ExportToBigquery.exportToBigquery(
+        PROJECT_ID, BIGQUERY_PROJECT_ID, bigqueryDatasetId, bigqueryTableId);
+    assertThat(bout.toString()).contains("Exported data to BigQuery");
   }
 }
