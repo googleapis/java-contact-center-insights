@@ -493,7 +493,8 @@ public class MockContactCenterInsightsImpl extends ContactCenterInsightsImplBase
       responseObserver.onError(
           new IllegalArgumentException(
               String.format(
-                  "Unrecognized response type %s for method CalculateIssueModelStats, expected %s or %s",
+                  "Unrecognized response type %s for method CalculateIssueModelStats, expected %s"
+                      + " or %s",
                   response == null ? "null" : response.getClass().getName(),
                   CalculateIssueModelStatsResponse.class.getName(),
                   Exception.class.getName())));
