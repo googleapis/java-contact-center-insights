@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.11](https://github.com/googleapis/java-contact-center-insights/compare/v2.3.10...v2.3.11) (2023-07-05)
+
+
+### Dependencies
+
+* Update dependency com.google.cloud:google-cloud-shared-dependencies to v3.0.6 ([#383](https://github.com/googleapis/java-contact-center-insights/issues/383)) ([73ed59f](https://github.com/googleapis/java-contact-center-insights/commit/73ed59f8d1df2e87d0c44ed1c859836030eb7051))
+
 ## [2.3.10](https://github.com/googleapis/java-contact-center-insights/compare/v2.3.9...v2.3.10) (2022-10-10)
 
 
